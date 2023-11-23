@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/nc3_goodluck/Library-of-Fire/Library-of-Fire.csproj": {}
+    "C:\\Users\\peggy\\source\\repos\\Library-of-Firee\\Library-of-Fire.csproj": {}
   },
   "projects": {
-    "/Users/nc3_goodluck/Library-of-Fire/Library-of-Fire.csproj": {
+    "C:\\Users\\peggy\\source\\repos\\Library-of-Firee\\Library-of-Fire.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/nc3_goodluck/Library-of-Fire/Library-of-Fire.csproj",
+        "projectUniqueName": "C:\\Users\\peggy\\source\\repos\\Library-of-Firee\\Library-of-Fire.csproj",
         "projectName": "Library-of-Fire",
-        "projectPath": "/Users/nc3_goodluck/Library-of-Fire/Library-of-Fire.csproj",
-        "packagesPath": "/Users/nc3_goodluck/.nuget/packages/",
-        "outputPath": "/Users/nc3_goodluck/Library-of-Fire/obj/",
+        "projectPath": "C:\\Users\\peggy\\source\\repos\\Library-of-Firee\\Library-of-Fire.csproj",
+        "packagesPath": "C:\\Users\\peggy\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\peggy\\source\\repos\\Library-of-Firee\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/nc3_goodluck/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\peggy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -53,7 +55,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.401/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.400\\RuntimeIdentifierGraph.json"
         }
       }
     }
