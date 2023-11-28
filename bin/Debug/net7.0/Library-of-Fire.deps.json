@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Library-of-Fire/1.0.0": {
+        "runtime": {
+          "Library-of-Fire.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Library-of-Fire/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
