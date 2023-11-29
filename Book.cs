@@ -8,17 +8,17 @@ namespace Library_of_Fire
 {
     public class Book
     {
-        public Book(string _title, string _author, string _status, DateOnly _checkoutdate) 
+        public Book(string title, string author, string status, DateTime duedate)
         {
-            Title = _title;
-            Author = _author;
-            Status = _status;
-            CheckoutDate = _checkoutdate;
+            Title = title;
+            Author = author;
+            Status = status;
+            DueDate = duedate;
         }
         public string Title { get; set; }
         public string Author { get; set; }
         public string Status { get; set; }
-        public DateOnly CheckoutDate { get; set; }       
+        public DateTime DueDate { get; set; }
 
     }
 }
