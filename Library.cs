@@ -10,21 +10,22 @@ namespace Library_of_Fire
 {
     public class Library
     {
-        
+
 
         public Library()
-        { 
-          
+        {
+
 
             AddBook();
 
             DisplayBooks();
-
+            SearchByAuthor("Amelia Evergreen");
+            SearchByTitle("Destiny");
 
         }
 
         public void AddBook() // Initializing books list
-        {            
+        {
 
             Book.books.Add(new Book("Whispers of the Forgotten", "Amelia Evergreen", "onShelf", DateTime.Now));
             Book.books.Add(new Book("Eternal Twilight", "Sebastian Nightshade", "onShelf", DateTime.Now));
@@ -50,8 +51,40 @@ namespace Library_of_Fire
                 if (book.Status == "Checked Out")
                 {
                     Console.WriteLine($"Due Date: {book.DueDate.ToShortDateString()}");
-                }            
+                }
             }
+        }
+
+        public void SearchByAuthor(string authorKeyword)
+        {
+            List<Book> results = Book.books.Where(book => book.Author.Contains(authorKeyword)).ToList();
+            DisplaySearchResults(results, $"Search results for author '{authorKeyword}':");
+        }
+
+        public void SearchByTitle(string titleKeyword)
+        {
+            List<Book> results = Book.books.Where(book => book.Title.Contains(titleKeyword)).ToList();
+            DisplaySearchResults(results, $"Search results for title '{titleKeyword}':");
+        }
+        private void DisplaySearchResults(List<Book> results, string message)
+        {
+            Console.WriteLine(message);
+            if (results.Any())
+            {
+                foreach (Book book in results)
+                {
+                    Console.WriteLine($"{book.Title} by {book.Author} - Status: {book.Status}");
+                    if (book.Status == "Checked Out")
+                    {
+                        Console.WriteLine($"Due Date: {book.DueDate.ToShortDateString()}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("No matching books found.");
+            }
+
         }
     }
 }
