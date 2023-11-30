@@ -10,24 +10,18 @@ namespace Library_of_Fire
 {
     public class Library
     {
-
-
         public Library()
         {
-
-
             AddBook();
-
             DisplayBooks();
             SearchByAuthor("Amelia Evergreen");
             SearchByTitle("Destiny");
-
         }
 
         public void AddBook() // Initializing books list
         {
 
-            Book.books.Add(new Book("Whispers of the Forgotten", "Amelia Evergreen", "onShelf", DateTime.Now));
+            Book.books.Add(new Book("Whispers of the Forgotten", "Amelia Evergreen", "Checked Out", DateTime.Now));
             Book.books.Add(new Book("Eternal Twilight", "Sebastian Nightshade", "onShelf", DateTime.Now));
             Book.books.Add(new Book("Shadows of Destiny", "Harper Blackwood", "onShelf", DateTime.Now));
             Book.books.Add(new Book("The Enigma Chronicles", "Orion Steele", "onShelf", DateTime.Now));
@@ -43,11 +37,12 @@ namespace Library_of_Fire
 
         public void DisplayBooks()
         {
-            Console.WriteLine("Library Catalog:");
+            Console.WriteLine($"Library Catalog:");
+
             foreach (Book book in Book.books)
             {
 
-                Console.WriteLine($"{book.Title} by {book.Author} - Status: {book.Status}");
+                Console.WriteLine($"\n{book.Title}\nby {book.Author}\nStatus: {book.Status}");
                 if (book.Status == "Checked Out")
                 {
                     Console.WriteLine($"Due Date: {book.DueDate.ToShortDateString()}");
@@ -73,7 +68,7 @@ namespace Library_of_Fire
             {
                 foreach (Book book in results)
                 {
-                    Console.WriteLine($"{book.Title} by {book.Author} - Status: {book.Status}");
+                    Console.WriteLine($"{book.Title} by {book.Author} Status: {book.Status}");
                     if (book.Status == "Checked Out")
                     {
                         Console.WriteLine($"Due Date: {book.DueDate.ToShortDateString()}");
