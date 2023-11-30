@@ -71,7 +71,11 @@ namespace Library_of_Fire
                     Console.WriteLine($"{book.Title} by {book.Author} Status: {book.Status}");
                     if (book.Status == "Checked Out")
                     {
-                        Console.WriteLine($"Due Date: {book.DueDate.ToShortDateString()}");
+                        Console.WriteLine($"This book is due back {book.DueDate.ToShortDateString()}");
+                    }
+                    else if (book.Status == "onShelf")
+                    {
+                        Console.WriteLine($"Checking out, Due Date: {book.DueDate.AddDays(14)}");
                     }
                 }
             }
