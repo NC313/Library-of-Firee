@@ -20,5 +20,7 @@ namespace Library_of_Fire
         public string Status { get; set; }
         public DateTime DueDate { get; set; }
 
+        public static List<Book> books = new List<Book>();
+
     }
 }
