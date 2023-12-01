@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -21,19 +22,39 @@ namespace Library_of_Fire
 
         public void AddBook() // Initializing books list
         {
+            string fullPath = @"c:\Temp\BookListDownload.csv";
+            if (File.Exists(fullPath))
+            {
+                using var fileReaderStream = new StreamReader(fullPath);
 
-            Book.books.Add(new Book("Whispers of the Forgotten", "Amelia Evergreen", "Checked Out", DateTime.Now));
-            Book.books.Add(new Book("Eternal Twilight", "Sebastian Nightshade", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("Shadows of Destiny", "Harper Blackwood", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("The Enigma Chronicles", "Orion Steele", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("Beyond the Horizon", "Isabella Moon", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("Echoes of the Lost City", "Xavier Quest", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("A Dance with Shadows", "Seraphina Nightshade", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("Serenade of Silence", "Luna Serenity", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("The Quantum Paradox", "Atlas Nova", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("Harmony's End", "Aria Harmony", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("Veil of Illusions", "Magnus Mystique", "onShelf", DateTime.Now));
-            Book.books.Add(new Book("Chronicles of the Celestial Isles", "Celeste Starlight", "onShelf", DateTime.Now));
+                string currentLine;
+                do
+                {
+                    currentLine = fileReaderStream.ReadLine();
+                    if (currentLine == null)
+                    {
+                        break;
+                    }
+                    string[] lines = currentLine.Split(",");                                        
+                    Book.books.Add(new Book(lines[0], lines[1], lines[2], DateTime.Parse(lines[3])));
+                }
+                while (true);
+            }
+            else
+            {
+                Book.books.Add(new Book("Whispers of the Forgotten", "Amelia Evergreen", "Checked Out", DateTime.Now));
+                Book.books.Add(new Book("Eternal Twilight", "Sebastian Nightshade", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("Shadows of Destiny", "Harper Blackwood", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("The Enigma Chronicles", "Orion Steele", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("Beyond the Horizon", "Isabella Moon", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("Echoes of the Lost City", "Xavier Quest", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("A Dance with Shadows", "Seraphina Nightshade", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("Serenade of Silence", "Luna Serenity", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("The Quantum Paradox", "Atlas Nova", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("Harmony's End", "Aria Harmony", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("Veil of Illusions", "Magnus Mystique", "onShelf", DateTime.Now));
+                Book.books.Add(new Book("Chronicles of the Celestial Isles", "Celeste Starlight", "onShelf", DateTime.Now));
+            }
         }
 
         public void DisplayBooks()
