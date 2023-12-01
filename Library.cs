@@ -36,24 +36,24 @@ namespace Library_of_Fire
                         break;
                     }
                     string[] lines = currentLine.Split(",");                                        
-                    Book.books.Add(new Book(lines[0], lines[1], lines[2], DateTime.Parse(lines[3])));
+                    Book.books.Add(new Book(int.Parse(lines[0]), lines[1], lines[2], lines[3], DateTime.Parse(lines[4])));
                 }
                 while (true);
             }
             else
             {
-                Book.books.Add(new Book("Whispers of the Forgotten", "Amelia Evergreen", "Checked Out", DateTime.Now));
-                Book.books.Add(new Book("Eternal Twilight", "Sebastian Nightshade", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("Shadows of Destiny", "Harper Blackwood", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("The Enigma Chronicles", "Orion Steele", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("Beyond the Horizon", "Isabella Moon", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("Echoes of the Lost City", "Xavier Quest", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("A Dance with Shadows", "Seraphina Nightshade", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("Serenade of Silence", "Luna Serenity", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("The Quantum Paradox", "Atlas Nova", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("Harmony's End", "Aria Harmony", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("Veil of Illusions", "Magnus Mystique", "onShelf", DateTime.Now));
-                Book.books.Add(new Book("Chronicles of the Celestial Isles", "Celeste Starlight", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(1,"Whispers of the Forgotten", "Amelia Evergreen", "Checked Out", DateTime.Now));
+                Book.books.Add(new Book(2,"Eternal Twilight", "Sebastian Nightshade", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(3,"Shadows of Destiny", "Harper Blackwood", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(4,"The Enigma Chronicles", "Orion Steele", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(5,"Beyond the Horizon", "Isabella Moon", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(6,"Echoes of the Lost City", "Xavier Quest", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(7,"A Dance with Shadows", "Seraphina Nightshade", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(8,"Serenade of Silence", "Luna Serenity", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(9,"The Quantum Paradox", "Atlas Nova", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(10,"Harmony's End", "Aria Harmony", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(11,"Veil of Illusions", "Magnus Mystique", "onShelf", DateTime.Now));
+                Book.books.Add(new Book(12,"Chronicles of the Celestial Isles", "Celeste Starlight", "onShelf", DateTime.Now));
             }
         }
 
@@ -64,7 +64,7 @@ namespace Library_of_Fire
             foreach (Book book in Book.books)
             {
 
-                Console.WriteLine($"\n{book.Title}\nby {book.Author}\nStatus: {book.Status}");
+                Console.WriteLine($"\n{book.BookId}\n{book.Title}\nby {book.Author}\nStatus: {book.Status}");
                 if (book.Status == "Checked Out")
                 {
                     Console.WriteLine($"Due Date: {book.DueDate.ToShortDateString()}");
