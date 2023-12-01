@@ -16,6 +16,7 @@ namespace Library_of_Fire
             DisplayBooks();
             SearchByAuthor("Amelia Evergreen");
             SearchByTitle("Destiny");
+            ReturnBook("Whispers of the Forgotten");
         }
 
         public void AddBook() // Initializing books list
@@ -84,6 +85,18 @@ namespace Library_of_Fire
                 Console.WriteLine("No matching books found.");
             }
 
+        }
+        public void ReturnBook(string booktoReturn)
+        {
+            foreach (Book book in Book.books)
+            {
+                if (book.Title == booktoReturn)
+                {
+                    book.Status = "onShelf";
+                    Console.WriteLine($"Checking in {booktoReturn} and is now {book.Status}.");
+
+                }
+            }
         }
     }
 }
