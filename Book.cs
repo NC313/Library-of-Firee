@@ -22,5 +22,18 @@ namespace Library_of_Fire
 
         public static List<Book> books = new List<Book>();
 
+        public static void SaveBookList()
+        {
+            string fullPath = @"c:\Temp\BookListDownload.csv";
+            var fs = new FileStream(fullPath, FileMode.OpenOrCreate);
+            using var stream = new StreamWriter(fs);
+            for (int i = 0; i < Book.books.Count; i++)
+            {
+                string printLine = ($"{books[i].Title},{books[i].Author},{books[i].Status},{books[i].DueDate}");
+                stream.WriteLine(printLine);
+            }
+            stream.Close();
+        }
+
     }
 }
