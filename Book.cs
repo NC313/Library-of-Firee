@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Library_of_Fire
+﻿namespace Library_of_Fire
 {
     public class Book
     {

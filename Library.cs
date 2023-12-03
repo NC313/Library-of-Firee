@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Reflection.Metadata.BlobBuilder;
+﻿using System.Data;
 
 namespace Library_of_Fire
 {
@@ -14,12 +6,12 @@ namespace Library_of_Fire
     {
         public Library()
         {
-            AddBook();            
+            AddBook();
         }
 
         public void AddBook() // Initializing books list
         {
-            string fullPath = @"c:\Temp\BookListDownload.csv";            
+            string fullPath = @"c:\Temp\BookListDownload.csv";
             if (File.Exists(fullPath))
             {
                 using var fileReaderStream = new StreamReader(fullPath);
@@ -31,15 +23,15 @@ namespace Library_of_Fire
                     if (currentLine == null)
                     {
                         break;
-                    }                                                   
-                    string[] lines = currentLine.Split(",");                      
+                    }
+                    string[] lines = currentLine.Split(",");
                     int bookId = int.Parse(lines[0]);
                     Book.books.Add(new Book(bookId, lines[1], lines[2], lines[3], DateOnly.Parse(lines[4]), lines[5]));
                 }
                 while (true);
             }
             else
-            {                
+            {
                 Book.books.Add(new Book(1, "Whispers of the Forgotten", "Amelia Evergreen", "Checked Out", DateOnly.FromDateTime(DateTime.Now), "Angela"));
                 Book.books.Add(new Book(2, "Eternal Twilight", "Sebastian Nightshade", "onShelf", DateOnly.FromDateTime(DateTime.Now), ""));
                 Book.books.Add(new Book(3, "Shadows of Destiny", "Harper Blackwood", "onShelf", DateOnly.FromDateTime(DateTime.Now), ""));
@@ -97,7 +89,7 @@ namespace Library_of_Fire
                     ConsoleHelper.WriteLineColors($"{book.Title} by {book.Author}", ConsoleColor.Blue);
                     ConsoleHelper.WriteLineColors($"Status: {book.Status}", (book.Status == "Checked Out") ? ConsoleColor.Red : ConsoleColor.Green);
                     if (book.Status == "Checked Out")
-                    {                        
+                    {
                         ConsoleHelper.WriteLineColors($"This book is due back: {book.DueDate.ToShortDateString()}", ConsoleColor.Yellow);
                     }
                 }
@@ -108,113 +100,51 @@ namespace Library_of_Fire
             }
         }
 
-    public void CheckOutBook()
+        public void CheckOutBook()
         {
-            bool JuliusCeasar = false;
-            bool Cleopatra = false;
-            string JuliusCheckoutby = "";
-            string CleoCheckoutby = "";
-            string CheckOutBy = "";
+            // displays books
+            // ask user what book they want to check out
+            // check book status, if checked out tell user not available
+            // if book is on shelf, update status to checked out
+            // if book is ID 13 or 14 - tell user they burned the library down
+            // show menu again to allow user to exit app
+            // file is exported with updated status'
+
             string bookIdTxt = "";
-            bool libraryBurnedDown = false;
+            string CheckOutBy = "";
 
-            List<Book> resultsBurned = Book.books.Where(book => book.Status == "BurnedDown").ToList();
-            if (resultsBurned.Any())
-            {
-                ConsoleHelper.WriteLineColors("The library of Alexandria burned down, Human Civilization will be set back by a few hundred years!!!", ConsoleColor.DarkRed);
-            }
-            else
-            {
-                DisplayBooks();
-                Console.Write("Enter book ID: ");
-                bookIdTxt = Console.ReadLine();
-                if (int.TryParse(bookIdTxt, out int bookId))
-                {
-                    List<Book> results = Book.books.Where(book => book.BookId == bookId).ToList();
-                    if (results.Any())
-                    {
-                        foreach (Book book in results)
-                        {
-                            if (book.Status == "Checked Out")
-                            {
-                                ConsoleHelper.WriteLineColors($"{book.Title} by {book.Author} is already checked out", ConsoleColor.DarkYellow);
-                                ConsoleHelper.WriteLineColors($"It will be available after: {book.DueDate}", ConsoleColor.DarkYellow);
-                            }
-                            else
-                            {
-                                // Check if either Julius Ceaser or Cleopatra have been checked out
-                                List<Book> burnBooks = Book.books.Where(book => book.BookId == 13 || book.BookId == 14).ToList();
-                                foreach (Book bookList in burnBooks)
-                                {                                    
-                                    if (JuliusCeasar == false && bookList.BookId == 13 && bookList.Status == "Checked Out")
-                                    {
-                                        JuliusCeasar = true;
-                                        JuliusCheckoutby = bookList.CheckOutBy;
-                                    }
-                                    if (Cleopatra == false && bookList.BookId == 14 && bookList.Status == "Checked Out")
-                                    {
-                                        Cleopatra = true;
-                                        CleoCheckoutby = bookList.CheckOutBy;
-                                    }
-                                }
+            DisplayBooks();
 
-                                // Check out selected book
-                                foreach (Book bookList in Book.books)
-                                {
-                                    if (bookList.BookId == bookId)
-                                    {
-                                        Console.Write("Enter your name: ");
-                                        CheckOutBy = Console.ReadLine();
-                                        if (bookList.BookId == 13 && JuliusCeasar == false)
-                                        {
-                                            JuliusCeasar = true;
-                                            JuliusCheckoutby = CheckOutBy;
-                                        }
-                                        else if (bookList.BookId == 14 && Cleopatra == false)
-                                        {
-                                            Cleopatra = true;
-                                            CleoCheckoutby = CheckOutBy;
-                                        }
-                                        libraryBurnedDown = (JuliusCeasar && Cleopatra && JuliusCheckoutby == CleoCheckoutby);
-                                        if (libraryBurnedDown)
-                                        {
-                                            ConsoleHelper.WriteLineColors($"Congrats {CheckOutBy}, you just burned down the library of Alexandria,\nHuman Civilization will be set back by a few hundred years!!!", ConsoleColor.DarkRed);
-                                        }
-                                        else
-                                        {
-                                            bookList.Status = "Checked Out";
-                                            bookList.DueDate = DateOnly.FromDateTime(DateTime.Now.AddDays(14));
-                                            bookList.CheckOutBy = CheckOutBy;
-                                            ConsoleHelper.WriteLineColors($"Congrats {bookList.CheckOutBy}!!, you just checked out {bookList.Title} by {bookList.Author}", ConsoleColor.DarkYellow);
-                                            ConsoleHelper.WriteLineColors($"Please make sure to return it by: {bookList.DueDate}", ConsoleColor.DarkMagenta);
-                                        }
-                                    }                                    
-                                }
-                                if (libraryBurnedDown)
-                                {
-                                    foreach (Book bookList in Book.books)
-                                    {
-                                        bookList.Status = "BurnedDown";
-                                        bookList.DueDate = DateOnly.FromDateTime(DateTime.Now);
-                                        bookList.CheckOutBy = "";
-                                    }                                    
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        ConsoleHelper.WriteLineColors($"Nothing was found for Book Id {bookIdTxt}!!!", ConsoleColor.DarkRed);
-                    }
-                }
-                else
+            Console.Write("Enter your name: ");
+            CheckOutBy = Console.ReadLine();
+
+            Console.Write("Enter book ID: ");
+            bookIdTxt = Console.ReadLine();
+            if (int.TryParse(bookIdTxt, out int bookId))
+            {
+                Book book = Book.books.FirstOrDefault(book => book.BookId == bookId);
+                if (book != null)
                 {
-                    ConsoleHelper.WriteLineColors($"{bookIdTxt} is an invalid Book Id!!!", ConsoleColor.DarkRed);
+                    if (bookId == 13 || bookId == 14)
+                    {
+                        ConsoleHelper.WriteLineColors($"Congrats {CheckOutBy}, you just burned down the library of Alexandria,\nHuman Civilization will be set back by a few hundred years!!!", ConsoleColor.DarkRed);
+                    }
+                    else if (book.Status == "Checked Out")
+                    {
+                        ConsoleHelper.WriteLineColors($"{book.Title} by {book.Author} is already checked out", ConsoleColor.DarkYellow);
+                        ConsoleHelper.WriteLineColors($"It will be available after: {book.DueDate}", ConsoleColor.DarkYellow);
+                    }
+                    else if (book.Status == "onShelf")
+                    {
+                        ConsoleHelper.WriteLineColors($"{book.Title} by {book.Author} has now been checked out", ConsoleColor.DarkYellow);
+                        ConsoleHelper.WriteLineColors($"{book.Title} is due back by: {book.DueDate}", ConsoleColor.DarkYellow);
+                        book.Status = "Checked Out";
+                    }      
                 }
             }
         }
 
-    public void ReturnBook()
+        public void ReturnBook()
         {
             List<Book> resultsBurned = Book.books.Where(book => book.Status == "BurnedDown").ToList();
             if (resultsBurned.Any())
@@ -260,7 +190,7 @@ namespace Library_of_Fire
                         {
                             ConsoleHelper.WriteLineColors($"{i + 1}. {results[i].Title} by {results[i].Author}", ConsoleColor.DarkBlue);
                         }
-                        Console.Write("Enter the number of the one you would like to return? ");
+                        Console.Write("Enter the number of the one you would like to return: ");
                         string bookNumTxt = Console.ReadLine();
                         if (int.TryParse(bookNumTxt, out int bookNum))
                         {
@@ -289,7 +219,7 @@ namespace Library_of_Fire
                         }
                     }
                 }
-            }            
+            }
         }
     }
 }
