@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Reflection.Metadata.BlobBuilder;
+﻿using System.Data;
 
 namespace Library_of_Fire
 {
@@ -18,8 +10,8 @@ namespace Library_of_Fire
         }
 
         public void AddBook() // Initializing books list
-        {
-            string fullPath = @"c:\Temp\BookListDownload.csv";            
+        {            
+            string fullPath = $"{Book.TryGetAppDirectory()}BookListDownload.csv";            
             if (File.Exists(fullPath))
             {
                 using var fileReaderStream = new StreamReader(fullPath);
@@ -175,7 +167,7 @@ namespace Library_of_Fire
                                             Cleopatra = true;
                                             CleoCheckoutby = CheckOutBy;
                                         }
-                                        libraryBurnedDown = (JuliusCeasar && Cleopatra && JuliusCheckoutby == CleoCheckoutby);
+                                        libraryBurnedDown = (JuliusCeasar && Cleopatra && JuliusCheckoutby.ToLower() == CleoCheckoutby.ToLower());
                                         if (libraryBurnedDown)
                                         {
                                             ConsoleHelper.WriteLineColors($"Congrats {CheckOutBy}, you just burned down the library of Alexandria,\nHuman Civilization will be set back by a few hundred years!!!", ConsoleColor.DarkRed);
